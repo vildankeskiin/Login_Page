@@ -1,12 +1,13 @@
 import {Formik, Form, Field, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 import {useNavigate} from 'react-router-dom';
+import { User } from '../model/User';
 
 const Register = () => {
 
     const navigate = useNavigate();
 
-    const initialValues = {
+    const initialValues: User = {
         name: '',
         surname: '',
         email: '',
@@ -20,12 +21,7 @@ const Register = () => {
         password: Yup.string().required('Required'),
     });
 
-    const OnSubmit = (values: {
-        name: string;
-        surname: string;
-        email: string;
-        password: string;
-    }) => { 
+    const OnSubmit = (values: User) => {
         const users = JSON.parse(localStorage.getItem('users') || '[]');
         users.push(values);
         localStorage.setItem('users', JSON.stringify(users));
